@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Loan Calculator</string>
+    <string name="input_cost">Car Cost:</string>
+    <string name="input_payment">Down Payment:</string>
+    <string name="input_APR">APR:</string>
+    <string name="radio_loan">Loan</string>
+    <string name="radio_lease">Lease</string>
+    <string name="button">Calculate</string>
+    <string name="output_payment">Monthly Payment:</string>
+</resources>
