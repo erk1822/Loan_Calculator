@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                        barLabel.setText(i+"");
+                        barLabel.setText("Length of Loan (months): "+i+"");
 
                     }
 
@@ -63,25 +63,24 @@ public class MainActivity extends AppCompatActivity {
         String inputapr=aprView.getText().toString();
         double apr=Double.parseDouble(inputapr);
 
-        String barlabel=barLabel.getText().toString();
-        double label=Double.parseDouble(barlabel);
+        int i=seekBar.getProgress();
 
         double mr=(apr/100)/12;
         double L=cost-payment;
-        double n=label;
+        double n=i;
         double cost2;
         double P;
 
         if (radioLoan.isChecked()) {
-            P=mr*L/(Math.pow((1-(1+mr)),-n));
+            P=mr*L/(1-Math.pow(1+mr,-n));
         }
         else {
             cost2=cost/3;
             L=cost2-payment;
-            P=mr*L/(Math.pow((1-(1+mr)),-36));
+            P=mr*L/(1-Math.pow(1+mr,-36));
         }
         String twodecimals=String.format("%.02f", P);
-        outputPayment.setText(twodecimals+"");
+        outputPayment.setText("$"+twodecimals+"");
     }
 
 }
