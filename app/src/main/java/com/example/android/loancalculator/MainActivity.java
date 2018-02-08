@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             L=cost2-payment;
             P=mr*L/(1-Math.pow(1+mr,-36));
         }
-        String twodecimals=String.format("%.02f", P);
+        String twodecimals=String.format("%.2f", P);
         outputPayment.setText("$"+twodecimals+"");
     }
 
