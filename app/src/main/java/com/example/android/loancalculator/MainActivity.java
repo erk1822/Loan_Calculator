@@ -2,7 +2,9 @@ package com.example.android.loancalculator;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
@@ -31,11 +33,13 @@ public class MainActivity extends AppCompatActivity {
         barLabel=findViewById(R.id.barLabel);
         seekBar=findViewById(R.id.seekBar);
         radioLoan=findViewById(R.id.radioLoan);
+
         seekBar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                         barLabel.setText("Length of Loan (months): "+i+"");
+                        buttonPressed(seekBar);
 
                     }
 
@@ -51,6 +55,36 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
+        aprView.setOnEditorActionListener(
+                new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                        buttonPressed(textView);
+                        return false;
+                    }
+                }
+        );
+
+        radioLoan.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        buttonPressed(compoundButton);
+                    }
+                }
+        );
+
+
+        if (savedInstanceState !=null) {
+            outputPayment.setText(savedInstanceState.getString("Payment"));
+        }
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString("Payment", outputPayment.getText().toString());
     }
 
     public void buttonPressed(View v) {
